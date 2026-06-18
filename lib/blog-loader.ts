@@ -7,7 +7,19 @@ const postsDirectory = path.join(
   "content/blogs"
 );
 
-export function getAllBlogs() {
+export type Blog = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+  coverImage: string;
+  publishedAt: string;
+  featured?: boolean;
+  content: string;
+};
+
+export function getAllBlogs(): Blog[] {
   const files = fs
     .readdirSync(postsDirectory)
     .filter((file) => file.endsWith(".md"));
@@ -15,23 +27,31 @@ export function getAllBlogs() {
   return files.map((file) => {
     const slug = file.replace(".md", "");
 
-    const fullPath = path.join(postsDirectory, file);
+    const fullPath = path.join(
+      postsDirectory,
+      file
+    );
 
     const fileContent = fs.readFileSync(
       fullPath,
       "utf8"
     );
 
-    const { data } = matter(fileContent);
+    const { data, content } =
+      matter(fileContent);
 
     return {
       slug,
-      ...data,
+      ...(data as Omit<
+        Blog,
+        "slug" | "content"
+      >),
+      content,
     };
   });
 }
 
-export function getBlog(slug: string) {
+export function getBlog(slug: string): Blog {
   const fullPath = path.join(
     postsDirectory,
     `${slug}.md`
@@ -46,7 +66,7 @@ export function getBlog(slug: string) {
 
   return {
     slug,
-    ...data,
+    ...(data as Omit<Blog, "slug" | "content">),
     content,
   };
 }
