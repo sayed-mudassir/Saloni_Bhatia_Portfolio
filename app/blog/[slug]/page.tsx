@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Linkedin, Mail, Twitter } from "lucide-react";
+import { ArrowLeft, Mail } from "lucide-react";
+import {
+  FaLinkedin
+} from "react-icons/fa";
+
+import {
+  FaXTwitter
+} from "react-icons/fa6";
 import { AnimationRig } from "@/components/animations";
 import { BlogCard } from "@/components/blog-card";
 import { ReadingProgress } from "@/components/reading-progress";
@@ -66,16 +73,16 @@ console.log("Blog:", getBlog(slug));
           <aside className="hidden lg:block">
             <div className="sticky top-28 space-y-3">
               {[
-                ["mailto:?subject=Saloni Bhatia article", Mail],
-                ["https://www.linkedin.com", Linkedin],
-                ["https://twitter.com", Twitter]
-              ].map(([href, Icon]) => (
+  ["mailto:?subject=Saloni Bhatia article", Mail],
+  ["https://www.linkedin.com", FaLinkedin],
+  ["https://twitter.com", FaXTwitter]
+].map(([href, Icon]) => (
                 <Link
                   key={String(href)}
                   href={String(href)}
                   className="grid h-11 w-11 place-items-center rounded-full border border-[var(--border)] transition hover:bg-[color-mix(in_srgb,var(--foreground)_8%,transparent)]"
                 >
-                  {/* <Icon size={18} /> */}
+                  <Icon size={18} /> 
                 </Link>
               ))}
             </div>
@@ -98,9 +105,6 @@ console.log("Blog:", getBlog(slug));
             </div>
           </div>
 
-
-{/* 
-          */}
           <aside className="hidden lg:block">
   <div className="sticky top-28">
     <p className="mb-4 text-sm font-black uppercase tracking-[0.2em] text-[var(--accent)]">
