@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  --background: #f8f6f1;
+  --foreground: #171412;
+  --muted: #71695f;
+  --card: rgba(255, 255, 255, 0.66);
+  --border: rgba(37, 31, 25, 0.14);
+  --accent: #b05d3a;
+  --accent-2: #126d70;
+  --accent-3: #7157a3;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #11100f;
+  --foreground: #f7efe5;
+  --muted: #bfb3a4;
+  --card: rgba(28, 26, 24, 0.72);
+  --border: rgba(247, 239, 229, 0.16);
+  --accent: #f0a274;
+  --accent-2: #67c8c1;
+  --accent-3: #bfa6ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 12% 12%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 30rem),
+    radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 28rem),
+    linear-gradient(135deg, var(--background), color-mix(in srgb, var(--background) 82%, var(--accent-3)));
+  color: var(--foreground);
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.glass {
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 24px 80px rgba(12, 10, 8, 0.12);
+  backdrop-filter: blur(22px);
+}
+
+.dark .glass {
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
+}
+
+.section-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.premium-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.reveal,
+.stagger-item,
+.article-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.tilt-card:hover {
+  box-shadow: 0 28px 90px color-mix(in srgb, var(--accent) 24%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+}
+
+.magnetic {
+  transition: transform 180ms ease;
+}
+
+.reading-progress {
+  transform-origin: left center;
+}
+
+.carousel-track {
+  animation: marquee 28s linear infinite;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .stagger-item,
+  .article-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
