@@ -1,5 +1,5 @@
 type ClassValue = string | number | false | null | undefined | ClassValue[];
 
-export function cn(...inputs: ClassValue[]) {
-  return inputs.flat(Infinity).filter(Boolean).join(" ");
+export function cn(...inputs: (string | undefined | null | false)[]) {
+  return inputs.filter(Boolean).join(" ");
 }

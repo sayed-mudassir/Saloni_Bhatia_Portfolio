@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Linkedin, Mail, PenLine } from "lucide-react";
-
+import { Mail, PenLine } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 export function Footer() {
   return (
     <footer className="border-t border-[var(--border)] py-12">
@@ -24,9 +24,9 @@ export function Footer() {
           <Link href="mailto:hello@salonibhatia.com" aria-label="Email">
             <Mail size={18} />
           </Link>
-          {/* <Link href="https://www.linkedin.com" aria-label="LinkedIn">
-            <Linkedin size={18} />
-          </Link> */}
+          <Link href="https://www.linkedin.com" aria-label="LinkedIn">
+            <FaLinkedin size={18} />
+          </Link> 
         </div>
         <p className="text-sm text-[var(--muted)]">© 2026 Saloni Bhatia. Demo showcase.</p>
       </div>
